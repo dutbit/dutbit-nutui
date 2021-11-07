@@ -7,5 +7,9 @@ This template should help get you started developing with Vue 3 in Vite. The tem
 - [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
 
 npm i @nutui/nutui@next
+
 npm install vite-plugin-style-import --save-dev
+
 npm install vue-router@4
+
+cnpm i unplugin-vue-components -D
