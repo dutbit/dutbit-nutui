@@ -85,15 +85,9 @@ body,
 .container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 10px;
 }
 .nut-navbar {
   margin-bottom: 0px;
-}
-.nut-cell-group {
-  width: 92%;
-}
-.nut-cell {
-  align-items: center;
 }
 </style>
