@@ -1,19 +1,20 @@
 <template>
   <nut-navbar
-    @on-click-back="routeBack"
     :title="pageTitle"
     :left-show="isShowBack"
+    icon="home"
+    @on-click-back="routeBack"
+    @on-click-send="goHome"
   ></nut-navbar>
   <div id="page">
-    <div class="container">
-      <router-view />
-    </div>
+    <router-view />
   </div>
   <nut-tabbar
-    :bottom="true"
     unactive-color="#7d7e80"
     active-color="#1989fa"
     id="tabbar"
+    :class="{ 'at-hidden': !isShowTabbar }"
+    v-model:visible="activeTabbar"
   >
     <nut-tabbar-item tab-title="首页" icon="home" to="/home"></nut-tabbar-item>
     <nut-tabbar-item
@@ -34,7 +35,12 @@
 export default {
   components: {},
   data() {
-    return { pageTitle: 'pageTitle', isShowBack: false }
+    return {
+      pageTitle: 'pageTitle',
+      isShowBack: false,
+      isShowTabbar: true,
+      activeTabbar: 0,
+    }
   },
   inject: [],
   computed: {
@@ -46,6 +52,10 @@ export default {
     routeBack() {
       this.$router.go(-1)
     },
+    goHome() {
+      this.$router.push('/')
+      this.activeTabbar = 0
+    },
   },
   provide() {
     return {}
@@ -53,7 +63,10 @@ export default {
   mounted() {
     this.$router.beforeEach((to, from) => {
       // console.log(to)
+      document.title = to.meta?.pageTitle
       this.pageTitle = to.meta?.pageTitle
+      this.isShowTabbar = to.meta?.isShowTabbar ?? true
+
       let lenPath = to.path.split('/').length
       this.isShowBack = lenPath > 2
     })
@@ -77,8 +90,18 @@ body,
   background: #f5f6f8;
 }
 
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+.at-hidden {
+  display: none;
+}
+
 #page {
-  height: calc(100% - 94px);
+  position: relative;
+  flex: auto;
   overflow-y: auto;
 }
 

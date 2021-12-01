@@ -47,20 +47,16 @@
 export default {
   components: {},
   data() {
-    return {};
+    return {}
   },
   inject: [],
   computed: {},
-  methods: {
-    routeBack() {
-      this.$router.go(-1);
-    },
-  },
+  methods: {},
   provide() {
-    return {};
+    return {}
   },
   mounted() {},
-};
+}
 </script>
 
 <style scoped>
