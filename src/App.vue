@@ -42,7 +42,7 @@ export default {
       activeTabbar: 0,
     }
   },
-  inject: [],
+  inject: ['axiosBaseURL'],
   computed: {
     isHome() {
       return pageTitle == '首页'
@@ -61,6 +61,11 @@ export default {
     return {}
   },
   mounted() {
+    this.$http.defaults.baseURL = this.axiosBaseURL
+    this.$http.interceptors.request.use((config) => {
+      config.headers.Authorization = window.localStorage.getItem('token')
+      return config
+    })
     this.$router.beforeEach((to, from) => {
       // console.log(to)
       document.title = to.meta?.pageTitle
