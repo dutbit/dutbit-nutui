@@ -32,13 +32,23 @@
       ></nut-cell>
     </nut-cell-group>
   </nut-popup>
-  <nut-over-lay />
-  <div class="di-btn" @click="isShowPopup = true">
-    <nut-icon name="more-x"></nut-icon>
+  <div class="di-btn">
+    <nut-icon
+      name="more-x"
+      @click="isShowPopup = true"
+      style="margin-right: 5px"
+    />
+    <nut-icon name="download" />
+    <img
+      class="fake-icon"
+      :src="toUrlImg(this.lstCont[this.swiperIndex])"
+      @click="showDownloadTip"
+    />
   </div>
 </template>
 
 <script>
+import { OverLay, Notify } from '@nutui/nutui'
 export default {
   components: {},
   data() {
@@ -51,22 +61,25 @@ export default {
       updating: false,
     }
   },
-  inject: ['axiosBaseURL'],
+  inject: ['axiosBaseURL', 'app'],
   computed: {},
   methods: {
     swiperChange(index) {
       this.swiperIndex = index
+      this.app.pageTitle = this.lstCont[this.swiperIndex].split('.')[0]
     },
     getCata(isGetCont) {
       this.$http.get('/day-image/cata').then((res) => {
-        this.lstCata = res.data.lstCata
+        this.lstCata = res.data.lstCata.sort().reverse()
         if (isGetCont) this.getCont(this.lstCata[0])
       })
     },
     getCont(nameDir) {
       this.$http.get(`/day-image/cont/${nameDir}`).then((res) => {
         this.nameDir = nameDir
-        this.lstCont = res.data.lstCont
+        this.lstCont = res.data.lstCont.sort()
+        this.swiperIndex = this.lstCont.length - 1
+        this.swiperChange(this.swiperIndex)
         // https://www.jianshu.com/p/1a60557b74c1
         this.updating = true
         this.$nextTick(() => {
@@ -77,6 +90,12 @@ export default {
     },
     toUrlImg(filename) {
       return `${this.axiosBaseURL}/day-image/img/${this.nameDir}/${filename}`
+    },
+    showDownloadTip() {
+      Notify.text('请长按后保存', {
+        color: '#ad0000',
+        background: '#ffe1e1',
+      })
     },
   },
   provide() {
@@ -120,5 +139,11 @@ export default {
   background: rgba(0, 0, 0, 0.33);
   color: #fff;
   font-size: 14px;
+}
+.fake-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: -20px;
+  opacity: 0;
 }
 </style>

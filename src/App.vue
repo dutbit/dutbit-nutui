@@ -1,6 +1,6 @@
 <template>
   <nut-navbar
-    :title="pageTitle"
+    :title="app.pageTitle"
     :left-show="isShowBack"
     icon="home"
     @on-click-back="routeBack"
@@ -36,16 +36,18 @@ export default {
   components: {},
   data() {
     return {
-      pageTitle: 'pageTitle',
       isShowBack: false,
       isShowTabbar: true,
       activeTabbar: 0,
+      app: {
+        pageTitle: 'pageTitle',
+      },
     }
   },
   inject: ['axiosBaseURL'],
   computed: {
     isHome() {
-      return pageTitle == '首页'
+      return this.app.pageTitle == '首页'
     },
   },
   methods: {
@@ -58,7 +60,7 @@ export default {
     },
   },
   provide() {
-    return {}
+    return { app: this.app }
   },
   mounted() {
     this.$http.defaults.baseURL = this.axiosBaseURL
@@ -69,7 +71,7 @@ export default {
     this.$router.beforeEach((to, from) => {
       // console.log(to)
       document.title = to.meta?.pageTitle
-      this.pageTitle = to.meta?.pageTitle
+      this.app.pageTitle = to.meta?.pageTitle
       this.isShowTabbar = to.meta?.isShowTabbar ?? true
 
       let lenPath = to.path.split('/').length
