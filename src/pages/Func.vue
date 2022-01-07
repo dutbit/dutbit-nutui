@@ -29,12 +29,7 @@
         is-link
       ></nut-cell>
       <nut-cell title="日历图" is-link to="/func/dayImage"></nut-cell>
-      <nut-cell
-        title="大工主页"
-        desc="外部链接"
-        is-link
-        url="https://www.dlut.edu.cn/"
-      ></nut-cell>
+      <nut-cell title="志愿时长查询" is-link to="/func/voltime"></nut-cell>
       <nut-cell
         title="大工主页"
         desc="外部链接"

@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-import Home from './components/Home.vue'
-import Func from './components/Func.vue'
-import Message from './components/Message.vue'
-import My from './components/My.vue'
-import About from './components/About.vue'
-import SelectIssueType from './components/func/SelectIssueType.vue'
-import DayImage from './components/func/DayImage.vue'
+import Home from './pages/Home.vue'
+import Func from './pages/Func.vue'
+import Message from './pages/Message.vue'
+import My from './pages/My.vue'
+import About from './pages/About.vue'
+import SelectIssueType from './pages/func/SelectIssueType.vue'
+import DayImage from './pages/func/DayImage.vue'
 
 const routes = [
   { path: '/', component: Home, meta: { pageTitle: '首页' } },
