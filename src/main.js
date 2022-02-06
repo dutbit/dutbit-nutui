@@ -1,12 +1,14 @@
 import { createApp } from 'vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
-import { Icon } from '@nutui/nutui'
+import { Cell, CellGroup, Icon } from '@nutui/nutui'
 import App from './App.vue'
 import router from './router.js'
 
 const app = createApp(App)
 app.use(router)
+app.use(Cell)
+app.use(CellGroup)
 app.use(Icon)
 app.use(VueAxios, axios)
 if (import.meta.env.DEV) {

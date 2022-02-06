@@ -6,34 +6,27 @@
     @on-click-back="routeBack"
     @on-click-send="goHome"
   ></nut-navbar>
-  <div id="page">
-    <router-view />
+  <div style="position: relative; flex: auto; overflow-y: auto">
+    <div style="min-height: calc(100% - 40px)">
+      <router-view />
+    </div>
+    <div class="footer">&copy; 校团委 · 比特网络工作室</div>
   </div>
   <nut-tabbar
     unactive-color="#7d7e80"
     active-color="#1989fa"
-    id="tabbar"
-    :class="{ 'at-hidden': !isShowTabbar }"
+    :class="{ 'bit-hidden': !isShowTabbar }"
     v-model:visible="activeTabbar"
   >
-    <nut-tabbar-item tab-title="首页" icon="home" to="/home"></nut-tabbar-item>
-    <nut-tabbar-item
-      tab-title="功能"
-      icon="category"
-      to="/func"
-    ></nut-tabbar-item>
-    <nut-tabbar-item
-      tab-title="消息"
-      icon="message"
-      to="/message"
-    ></nut-tabbar-item>
-    <nut-tabbar-item tab-title="我的" icon="my" to="/my"></nut-tabbar-item>
+    <nut-tabbar-item tab-title="首页" icon="home" to="/home" />
+    <nut-tabbar-item tab-title="功能" icon="category" to="/func" />
+    <nut-tabbar-item tab-title="消息" icon="message" to="/message" />
+    <nut-tabbar-item tab-title="我的" icon="my" to="/my" />
   </nut-tabbar>
 </template>
 
 <script>
 export default {
-  components: {},
   data() {
     return {
       isShowBack: false,
@@ -44,11 +37,14 @@ export default {
       },
     }
   },
-  inject: ['axiosBaseURL'],
   computed: {
     isHome() {
       return this.app.pageTitle == '首页'
     },
+  },
+  inject: ['axiosBaseURL'],
+  provide() {
+    return { app: this.app }
   },
   methods: {
     routeBack() {
@@ -58,9 +54,6 @@ export default {
       this.$router.push('/')
       this.activeTabbar = 0
     },
-  },
-  provide() {
-    return { app: this.app }
   },
   mounted() {
     this.$http.defaults.baseURL = this.axiosBaseURL
@@ -81,7 +74,19 @@ export default {
 }
 </script>
 
+<style scoped>
+.footer {
+  height: 20px;
+  margin: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  color: #ccc;
+}
+</style>
+
 <style>
+/* 公共样式 */
 *,
 *::before,
 *::after {
@@ -102,22 +107,31 @@ body,
   flex-direction: column;
 }
 
-.at-hidden {
+hr {
+  height: 2px;
+  width: 100%;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 10px 0;
+}
+
+.nut-navbar {
+  margin-bottom: 0px;
+}
+.bit-hidden {
   display: none;
 }
 
-#page {
-  position: relative;
-  flex: auto;
-  overflow-y: auto;
-}
-
-.container {
+.bit-container {
   display: flex;
   flex-direction: column;
-  padding: 10px;
+  padding: 10px 10px 0;
 }
-.nut-navbar {
-  margin-bottom: 0px;
+.bit-container-n {
+  padding: 10px 10px 0;
+}
+.bit-title {
+  font-size: 30px;
+  margin-left: 20px;
 }
 </style>
