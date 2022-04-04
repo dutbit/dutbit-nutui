@@ -1,16 +1,12 @@
 <template>
-  <nut-navbar
-    :title="app.pageTitle"
-    :left-show="isShowBack"
-    icon="home"
-    @on-click-back="routeBack"
-    @on-click-send="goHome"
-  ></nut-navbar>
+  <nut-navbar :title="app.pageTitle" :left-show="isShowBack" @on-click-back="routeBack">
+    <template #right>
+      <nut-icon name="home" @click="goHome"></nut-icon>
+    </template>
+  </nut-navbar>
   <div style="position: relative; flex: auto; overflow-y: auto">
-    <div style="min-height: calc(100% - 40px)">
-      <router-view />
-    </div>
-    <div class="footer">&copy; 校团委 · 比特网络工作室</div>
+    <div style="min-height: calc(100% - 40px)"><router-view /></div>
+    <div :class="['footer', { 'bit-hidden': !isShowTabbar }]">&copy; 校团委 · 比特网络工作室</div>
   </div>
   <nut-tabbar
     unactive-color="#7d7e80"
@@ -62,6 +58,10 @@ export default {
       return config
     })
     this.$router.beforeEach((to, from) => {
+      if (to.meta.isRequireAuth ?? false) {
+        let token = window.localStorage.getItem('Authorization')
+        if (!token) return { path: '/login', query: { login_target: to.fullPath } }
+      }
       // console.log(to)
       document.title = to.meta?.pageTitle
       this.app.pageTitle = to.meta?.pageTitle
@@ -116,8 +116,19 @@ hr {
 }
 
 .nut-navbar {
+  flex: none;
   margin-bottom: 0px;
 }
+.nut-form .nut-form-item__label.required::before {
+  content: '';
+  margin: 0;
+}
+.nut-form .nut-form-item__label.required::after {
+  content: '*';
+  color: #fa2c19;
+  margin-left: 4px;
+}
+
 .bit-hidden {
   display: none;
 }
@@ -133,5 +144,11 @@ hr {
 .bit-title {
   font-size: 30px;
   margin-left: 20px;
+}
+.c-hidden {
+  display: none;
+}
+.c-opacity-0 {
+  opacity: 0;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div class="bit-container-n">
-    <div class="bit-title">反馈</div>
+    <div class="bit-title">{{ dictForm.type == '小团儿为你办实事' ? '小团儿办实事' : '反馈' }}</div>
     <hr />
     <nut-form ref="form" :model-value="dictForm">
       <nut-form-item label="反馈类型" prop="type" required :rules="[{ required: true, message: '请选择反馈类型' }]">
@@ -23,7 +23,13 @@
         <input class="nut-input-text" placeholder="请输入学号" v-model="dictForm.stu_id" type="number" />
       </nut-form-item>
       <nut-form-item label="反馈内容" prop="content" required :rules="[{ required: true, message: '请填写反馈内容' }]">
-        <nut-text-area placeholder="遇到的问题或您的建议" v-model="dictForm.content" max-length="200" limit-show />
+        <nut-text-area
+          placeholder="遇到的问题或您的建议"
+          v-model="dictForm.content"
+          rows="7"
+          max-length="200"
+          limit-show
+        />
       </nut-form-item>
     </nut-form>
     <vue-hcaptcha ref="hcap" sitekey="45d5cbb6-8bcf-4348-951a-eeaee561d7cb" @verify="isVerified = true"></vue-hcaptcha>
@@ -56,11 +62,10 @@ export default {
       this.$refs.form.validate().then(({ valid, errors }) => {
         if (valid) {
           this.isLoading = true
-          const toast = Toast.loading('正在提交', { duration: 0 })
+          Toast.loading('正在提交')
           this.$http.post('/issue/', this.dictForm).then((res) => {
             this.isLoading = false
             this.onReset()
-            toast.hide()
             Toast.success('已提交')
           })
         } else console.log('表单校验未通过', errors)
@@ -87,13 +92,4 @@ export default {
 </script>
 
 <style scoped>
-:deep(.nut-form-item__label.required::before) {
-  content: '';
-  margin: 0;
-}
-:deep(.nut-form-item__label.required::after) {
-  content: '*';
-  color: #fa2c19;
-  margin-left: 4px;
-}
 </style>

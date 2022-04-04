@@ -35,8 +35,9 @@ export default {
       },
     },
   },
-  // can fix: Unrestricted file system access to
   server: {
+    host: '0.0.0.0',
+    // can fix: Unrestricted file system access to
     fs: {
       // 可以为项目根目录的上一级提供服务
       allow: ['..'],
