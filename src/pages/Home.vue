@@ -1,47 +1,23 @@
 <template>
-  <div class="container">
-    <nut-swiper
-      :init-page="0"
-      :pagination-visible="true"
-      pagination-color="#426543"
-      auto-play="0"
-      height="160"
-    >
+  <div class="bit-container">
+    <nut-swiper :init-page="0" :pagination-visible="true" pagination-color="#426543" auto-play="0" height="160">
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg" alt="" />
       </nut-swiper-item>
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/welcomenutui.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/welcomenutui.jpg" alt="" />
       </nut-swiper-item>
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/fristfabu.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/fristfabu.jpg" alt="" />
       </nut-swiper-item>
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/NutUItaro34.jpg" alt="" />
       </nut-swiper-item>
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/welcomenutui.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/welcomenutui.jpg" alt="" />
       </nut-swiper-item>
       <nut-swiper-item>
-        <img
-          src="https://storage.360buyimg.com/jdc-article/fristfabu.jpg"
-          alt=""
-        />
+        <img src="https://storage.360buyimg.com/jdc-article/fristfabu.jpg" alt="" />
       </nut-swiper-item>
     </nut-swiper>
     <nut-tabs v-model="tab1value" animated-time="100" color="#ff0000">
