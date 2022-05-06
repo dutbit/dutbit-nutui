@@ -7,7 +7,7 @@ import Login from './pages/Login.vue'
 import Message from './pages/Message.vue'
 import My from './pages/My.vue'
 import CardimgCard from './pages/func/CardimgCard.vue'
-import DayImage from './pages/func/DayImage.vue'
+import Dayimg from './pages/func/Dayimg.vue'
 import IssueForm from './pages/func/IssueForm.vue'
 import PointQuery from './pages/func/PointQuery.vue'
 import Postcard from './pages/func/Postcard.vue'
@@ -24,7 +24,7 @@ const routes = [
   { path: '/about', component: About, meta: { pageTitle: '关于' } },
   { path: '/login', component: Login, meta: { pageTitle: '登录' } },
   { path: '/func/cardimg-card', component: CardimgCard, meta: { pageTitle: '专属证书' } },
-  { path: '/func/dayImage', component: DayImage, meta: { pageTitle: '日历图', isShowTabbar: false } },
+  { path: '/func/dayimg', component: Dayimg, meta: { pageTitle: '日历图', isShowTabbar: false } },
   { path: '/func/issue-form', component: IssueForm, meta: { pageTitle: '咨询反馈' } },
   { path: '/func/point', component: PointQuery, meta: { pageTitle: '积分查询' } },
   { path: '/func/postcard', component: Postcard, meta: { pageTitle: '大工明信片' } },
