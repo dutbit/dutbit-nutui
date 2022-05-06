@@ -11,7 +11,7 @@
           readonly
           @click="isSwTypePker = true"
         />
-        <nut-picker v-model:visible="isSwTypePker" :list-data="lstTypes" title="反馈类型" @confirm="onCfmType" />
+        <nut-picker v-model:visible="isSwTypePker" :columns="lstTypes" title="反馈类型" @confirm="onCfmType" />
       </nut-form-item>
       <nut-form-item label="联系方式" prop="contact" required :rules="[{ required: true, message: '请填写联系方式' }]">
         <input class="nut-input-text" placeholder="邮箱（推荐）/电话" v-model="dictForm.contact" />
@@ -55,8 +55,8 @@ export default {
     }
   },
   methods: {
-    onCfmType(res) {
-      this.dictForm.type = res
+    onCfmType({ selectedValue }) {
+      this.dictForm.type = selectedValue[0]
     },
     onSubmit() {
       this.$refs.form.validate().then(({ valid, errors }) => {
@@ -78,7 +78,9 @@ export default {
   },
   mounted() {
     this.$http.get('/issue/').then((res) => {
-      Object.assign(this, res.data)
+      this.lstTypes = res.data.lstTypes.map((value) => {
+        return { text: value, value: value }
+      })
     })
   },
   // https://next.router.vuejs.org/zh/guide/advanced/navigation-guards.html#组件内的守卫

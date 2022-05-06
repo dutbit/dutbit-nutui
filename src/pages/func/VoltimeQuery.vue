@@ -1,6 +1,8 @@
 <template>
   <div class="bit-container-n">
-    <div class="bit-title">志愿时长查询 <a href="#" style="font-size: 20px">排行榜</a></div>
+    <div class="bit-title">
+      志愿时长查询 <span style="font-size: 20px; color: blue" @click="showRanking">排行榜</span>
+    </div>
     <div style="color: #0246b3; font-size: 20px; text-align: right">更新至：{{ lastDate }}</div>
     <hr />
     <nut-input label="姓名" placeholder="请输入姓名" v-model="dictForm.name" />
@@ -40,7 +42,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="item in lstVoltimes" :key="item.id" :class="{ 'query-newly': item.queryNewly }">
+          <tr v-for="item in lstVoltimes" :key="item.id">
             <td style="max-width: 7em">{{ item.stu_id }}</td>
             <td style="max-width: 7em">{{ item.name }}</td>
             <td style="max-width: 6em">{{ item.faculty }}</td>
@@ -55,6 +57,27 @@
       </table>
     </div>
   </div>
+  <nut-popup position="right" v-model:visible="isShowPopup" style="height: 100%; width: 75%">
+    <span style="padding: 20px; font-size: 28px">排行榜</span>
+    <table style="width: 100%; border-collapse: collapse">
+      <thead>
+        <tr>
+          <th>排名</th>
+          <th>学号</th>
+          <th>姓名</th>
+          <th>时长</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(item, index) in lstRanking" :key="item.id">
+          <td>{{ index + 1 }}</td>
+          <td>{{ item.one_id }}</td>
+          <td>{{ item.one_name }}</td>
+          <td>{{ item.dur_sum }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </nut-popup>
 </template>
 
 <script>
@@ -71,6 +94,8 @@ export default {
       numDupName: 1,
       isErrQueryLost: false,
       isLoading: false,
+      lstRanking: [],
+      isShowPopup: false,
     }
   },
   methods: {
@@ -83,6 +108,13 @@ export default {
         this.isLoading = false
         Notify.primary('查询完毕')
       })
+    },
+    showRanking() {
+      this.isShowPopup = true
+      if (!this.lstRanking.length)
+        this.$http.get('/voltime/top').then((res) => {
+          this.lstRanking = res.data
+        })
     },
   },
   mounted() {
@@ -102,9 +134,6 @@ export default {
 }
 tr {
   border-top: 1px solid #ddd;
-}
-tr.query-newly {
-  background-color: #edf2ff;
 }
 td,
 th {
