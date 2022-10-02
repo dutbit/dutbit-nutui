@@ -63,7 +63,7 @@ export default {
         if (valid) {
           this.isLoading = true
           Toast.loading('正在提交')
-          this.$http.post('/issue/', this.dictForm).then((res) => {
+          this.$http.post('/issue/', this.dictForm).then((_res) => {
             this.isLoading = false
             this.onReset()
             Toast.success('已提交')
@@ -79,7 +79,7 @@ export default {
   mounted() {
     this.$http.get('/issue/').then((res) => {
       this.lstTypes = res.data.lstTypes.map((value) => {
-        return { text: value, value: value }
+        return { text: value, value }
       })
     })
   },
@@ -93,5 +93,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

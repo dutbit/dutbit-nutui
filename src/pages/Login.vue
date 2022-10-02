@@ -38,7 +38,7 @@ export default {
     onLogin() {
       this.$refs.form.validate().then(({ valid, errors }) => {
         if (valid) {
-          let payload = Object.assign({}, this.dictForm)
+          const payload = Object.assign({}, this.dictForm)
           console.log(payload)
           payload.password = SHA512(payload.password).toString()
           console.log(payload.password)
@@ -60,5 +60,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

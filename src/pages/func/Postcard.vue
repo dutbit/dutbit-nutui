@@ -69,15 +69,15 @@ export default {
   data() {
     return {
       isSwAudio: false,
-      isSwRolePker: false, //isShowRolePicker
-      isSwWishPker: false, //isShowWishPicker
+      isSwRolePker: false, // isShowRolePicker
+      isSwWishPker: false, // isShowWishPicker
       isSwForm: true,
       isSwCus: false,
       lstBg: ['/01.jpg', '/02.jpg', '/03.jpg', '/04.jpg', '/05.jpg', '/06.jpg'],
       indBg: 0,
       dictForm: { name: '', role: '学生', wish: '' },
       lstRoles: ['学生', '老师', '校友', '我工粉丝'].map((value) => {
-        return { text: value, value: value }
+        return { text: value, value }
       }),
       lstWishes: [
         '生日快乐！',
@@ -89,7 +89,7 @@ export default {
         '越来越好，越来越棒！',
         '继往开来，再谱新篇！',
       ].map((value) => {
-        return { text: value, value: value }
+        return { text: value, value }
       }),
     }
   },

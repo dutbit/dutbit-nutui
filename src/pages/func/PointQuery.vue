@@ -45,9 +45,7 @@ export default {
           this.numPoints = res.data.points
           this.isShowResult = true
           Notify.primary('查询完毕')
-        } else {
-          Notify.warn('无查询结果')
-        }
+        } else Notify.warn('无查询结果')
       })
     },
   },

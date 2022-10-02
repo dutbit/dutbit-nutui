@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { ref } from 'vue'
 export default {
   data() {
     return {
@@ -34,21 +33,9 @@ export default {
       },
     }
   },
-  setup() {
-    let isShowBack = ref(false)
-    let isShowTabbar = ref(true)
-    let activeTabbar = ref(0)
-
-
-    return {
-      isShowBack,
-      isShowTabbar,
-      activeTabbar
-    }
-  },
   computed: {
     isHome() {
-      return this.app.pageTitle == '首页'
+      return this.app.pageTitle === '首页'
     },
   },
   inject: ['axiosBaseURL'],
@@ -70,16 +57,16 @@ export default {
       config.headers.Authorization = window.localStorage.getItem('Authorization')
       return config
     })
-    this.$router.beforeEach((to, from) => {
+    this.$router.beforeEach((to, _from) => {
       if (to.meta.isRequireAuth ?? false) {
-        let token = window.localStorage.getItem('Authorization')
+        const token = window.localStorage.getItem('Authorization')
         if (!token) return { path: '/login', query: { login_target: to.fullPath } }
       }
       // console.log(to)
       document.title = to.meta?.pageTitle
       this.app.pageTitle = to.meta?.pageTitle
       this.isShowTabbar = to.meta?.isShowTabbar ?? true
-      let lenPath = to.path.split('/').length
+      const lenPath = to.path.split('/').length
       this.isShowBack = lenPath > 2
     })
   },

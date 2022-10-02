@@ -26,8 +26,8 @@
 export default {
   data() {
     return {
-      isSwRolePker: false, //isShowRolePicker
-      isSwWishPker: false, //isShowWishPicker
+      isSwRolePker: false, // isShowRolePicker
+      isSwWishPker: false, // isShowWishPicker
       isSwImg: false,
       svgAttr: { width: 100, height: 100 },
       dictForm: { name: '张三', role: '学生', wish: '越来越好！越来越棒！' },
@@ -57,38 +57,37 @@ export default {
   },
   methods: {
     create() {
-      let img = new Image()
+      const img = new Image()
       img.setAttribute('crossorigin', 'anonymous')
       img.onload = () => {
-        let cvs = /** @type {HTMLCanvasElement} */ (this.$refs.cvs)
-        let ctx = cvs.getContext('2d')
+        const cvs = /** @type {HTMLCanvasElement} */ (this.$refs.cvs)
+        const ctx = cvs.getContext('2d')
         cvs.width = img.width
         cvs.height = img.height
         ctx.drawImage(img, 0, 0, cvs.width, cvs.height)
         this.svgAttr.width = img.width
         this.svgAttr.height = img.height
         this.$nextTick(() => {
-          let imgText = new Image()
+          const imgText = new Image()
           imgText.setAttribute('crossorigin', 'anonymous')
           imgText.onload = () => {
             ctx.drawImage(imgText, 0, 0)
             this.$refs.img.src = cvs.toDataURL('image/png')
           }
-          let svgBox = /** @type {HTMLDivElement} */ (this.$refs.svg)
+          const svgBox = /** @type {HTMLDivElement} */ (this.$refs.svg)
           imgText.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgBox.innerHTML)))
           this.isSwImg = true
         })
       }
       img.src = '/72card.png'
     },
-    //computeNumber
+    // computeNumber
     cNum(raw) {
       let res = null
-      if ((res = /width\*(.*)/.exec(String(raw)))) {
-        return this.svgAttr.width * parseFloat(res[1])
-      } else return raw
+      if ((res = /width\*(.*)/.exec(String(raw)))) return this.svgAttr.width * parseFloat(res[1])
+      else return raw
     },
-    //onConfirm
+    // onConfirm
     onCfmRole(res) {
       this.dictForm.role = res
     },
@@ -99,5 +98,4 @@ export default {
 }
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

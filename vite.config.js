@@ -1,6 +1,7 @@
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
-import styleImport from 'vite-plugin-style-import'
+import { createStyleImportPlugin } from 'vite-plugin-style-import'
+
 export default {
   base: './',
   plugins: [
@@ -10,20 +11,16 @@ export default {
       resolvers: [
         (name) => {
           // where `name` is always CapitalCase
-          if (name.startsWith('Nut')) {
-            return { importName: name.slice(3), path: '@nutui/nutui' }
-          }
+          if (name.startsWith('Nut')) return { name: name.slice(3), from: '@nutui/nutui' }
         },
       ],
     }),
-    styleImport({
-      libs: [
+    createStyleImportPlugin({
+      resolves: [
         {
           libraryName: '@nutui/nutui',
           libraryNameChangeCase: 'pascalCase',
-          resolveStyle: (name) => {
-            return `@nutui/nutui/dist/packages/${name}/index.scss`
-          },
+          resolveStyle: (name) => `@nutui/nutui/dist/packages/${name.toLowerCase()}/index.scss`,
         },
       ],
     }),

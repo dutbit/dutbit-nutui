@@ -13,7 +13,7 @@ import PointQuery from './pages/func/PointQuery.vue'
 import Postcard from './pages/func/Postcard.vue'
 import VoltimeQuery from './pages/func/VoltimeQuery.vue'
 
-const default_meta = { pageTitle: '必填', isShowTabbar: true, isRequireAuth: false }
+const _default_meta = { pageTitle: '必填', isShowTabbar: true, isRequireAuth: false }
 
 const routes = [
   { path: '/', component: Home, meta: { pageTitle: '首页' } },

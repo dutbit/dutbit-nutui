@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { OverLay, Notify } from '@nutui/nutui'
+import { Notify } from '@nutui/nutui'
 export default {
   components: {},
   data() {
