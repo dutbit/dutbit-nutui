@@ -17,7 +17,7 @@
     <div class="err-alert" v-if="numSameID > 1 || numSameName > numDupName">
       数据异常，您的学号对应 <strong>{{ numSameID }}</strong> 个姓名，您的姓名对应
       <strong>{{ numSameName }}</strong> 个学号，请
-      <router-link to="/func/issue-form?type=志愿时长查询">反馈错误</router-link>
+      <router-link to="/func/issue-form?type_id=2">反馈错误</router-link>
     </div>
     <div class="err-alert" v-if="isErrQueryLost">数据有缺失，请 <a href="#">反馈错误</a></div>
     <div class="info-box">
@@ -46,10 +46,10 @@
             <td style="max-width: 7em">{{ item.stu_id }}</td>
             <td style="max-width: 7em">{{ item.name }}</td>
             <td style="max-width: 6em">{{ item.faculty }}</td>
-            <td style="max-width: 7em">{{ item.activity_DATE }}</td>
+            <td style="max-width: 7em">{{ item.date }}</td>
             <td style="max-width: 3em">{{ item.duration }}</td>
             <td style="max-width: 15em">{{ item.activity_name }}</td>
-            <td style="max-width: 15em">{{ item.activity_faculty }}</td>
+            <td style="max-width: 15em">{{ item.duty_faculty }}</td>
             <td style="max-width: 7em">{{ item.duty_person }}</td>
             <td style="max-width: 15em">{{ item.remark }}</td>
           </tr>
@@ -69,11 +69,11 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in lstRanking" :key="item.id">
+        <tr v-for="(item, index) in lstTop" :key="item.id">
           <td>{{ index + 1 }}</td>
-          <td>{{ item.one_id }}</td>
-          <td>{{ item.one_name }}</td>
-          <td>{{ item.dur_sum }}</td>
+          <td>{{ item.stu_id }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.total }}</td>
         </tr>
       </tbody>
     </table>
@@ -94,7 +94,7 @@ export default {
       numDupName: 1,
       isErrQueryLost: false,
       isLoading: false,
-      lstRanking: [],
+      lstTop: [],
       isShowPopup: false,
     }
   },
@@ -111,9 +111,9 @@ export default {
     },
     showRanking() {
       this.isShowPopup = true
-      if (!this.lstRanking.length)
+      if (!this.lstTop.length)
         this.$http.get('/voltime/top').then((res) => {
-          this.lstRanking = res.data
+          this.lstTop = res.data.lstTop
         })
     },
   },
