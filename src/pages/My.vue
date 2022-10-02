@@ -1,5 +1,7 @@
 <template>
-  <nut-avatar icon="my" size="large" shape="square"></nut-avatar>
+  <div class="bit-container">
+    <nut-cell>正在开发~敬请期待~</nut-cell>
+  </div>
 </template>
 
 <script>

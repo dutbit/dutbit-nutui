@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   data() {
     return {
@@ -31,6 +32,18 @@ export default {
       app: {
         pageTitle: 'pageTitle',
       },
+    }
+  },
+  setup() {
+    let isShowBack = ref(false)
+    let isShowTabbar = ref(true)
+    let activeTabbar = ref(0)
+
+
+    return {
+      isShowBack,
+      isShowTabbar,
+      activeTabbar
     }
   },
   computed: {
@@ -54,7 +67,7 @@ export default {
   mounted() {
     this.$http.defaults.baseURL = this.axiosBaseURL
     this.$http.interceptors.request.use((config) => {
-      config.headers.Authorization = window.localStorage.getItem('token')
+      config.headers.Authorization = window.localStorage.getItem('Authorization')
       return config
     })
     this.$router.beforeEach((to, from) => {
@@ -66,7 +79,6 @@ export default {
       document.title = to.meta?.pageTitle
       this.app.pageTitle = to.meta?.pageTitle
       this.isShowTabbar = to.meta?.isShowTabbar ?? true
-
       let lenPath = to.path.split('/').length
       this.isShowBack = lenPath > 2
     })
@@ -144,6 +156,7 @@ hr {
 .bit-title {
   font-size: 30px;
   margin-left: 20px;
+  text-align: center;
 }
 .c-hidden {
   display: none;

@@ -25,8 +25,8 @@
   </nut-popup>
   <div class="di-btn">
     <nut-icon name="more-x" @click="isShowPopup = true" style="margin-right: 5px" />
-    <nut-icon name="download" />
-    <img class="fake-icon" :src="toUrlImg(this.lstCont[this.swiperIndex])" @click="showDownloadTip" />
+    <!-- <nut-icon name="download" />
+    <img class="fake-icon" :src="toUrlImg(this.lstCont[this.swiperIndex])" @click="showDownloadTip" /> -->
   </div>
 </template>
 

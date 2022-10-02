@@ -2,6 +2,7 @@ import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
 import styleImport from 'vite-plugin-style-import'
 export default {
+  base: './',
   plugins: [
     vue(),
     // https://github.com/antfu/unplugin-vue-components
