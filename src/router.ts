@@ -10,7 +10,6 @@ import CardimgCard from './pages/func/CardimgCard.vue'
 import Dayimg from './pages/func/Dayimg.vue'
 import IssueForm from './pages/func/IssueForm.vue'
 import PointQuery from './pages/func/PointQuery.vue'
-import Postcard from './pages/func/Postcard.vue'
 import VoltimeQuery from './pages/func/VoltimeQuery.vue'
 
 const _default_meta = { pageTitle: '必填', isShowTabbar: true, isRequireAuth: false }
@@ -27,7 +26,7 @@ const routes = [
   { path: '/func/dayimg', component: Dayimg, meta: { pageTitle: '日历图', isShowTabbar: false } },
   { path: '/func/issue-form', component: IssueForm, meta: { pageTitle: '咨询反馈' } },
   { path: '/func/point', component: PointQuery, meta: { pageTitle: '积分查询' } },
-  { path: '/func/postcard', component: Postcard, meta: { pageTitle: '大工明信片' } },
+  { path: '/func/postcard', component: () => import('./pages/func/Postcard.vue'), meta: { pageTitle: '大工明信片' } },
   { path: '/func/voltime', component: VoltimeQuery, meta: { pageTitle: '志愿时长查询' } },
 ]
 

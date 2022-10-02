@@ -1,4 +1,0 @@
-{
-  "compilerOptions": { "jsx": "preserve" },
-  "include": ["./src/*"]
-}

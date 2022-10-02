@@ -22,14 +22,13 @@ export default defineComponent({
           that.$http.get('https://dev.dutbit.com/wechat/login-wx-url', { params: { urlCurrent } }).then((res) => {
             window.location.href = res.data
           })
-        } else {
+        } else
           that.$http.get('https://dev.dutbit.com/wechat/login-redirect', { params: to.query }).then((res) => {
             window.localStorage.setItem('Authorization', res.data.openid)
             const redirect = window.localStorage.getItem('login_target') ?? '/'
             // 跳转到授权前访问的页面
             that.$router.replace({ path: redirect })
           })
-        }
       }
     })
   },

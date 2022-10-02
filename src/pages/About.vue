@@ -12,6 +12,18 @@
   </nut-cell-group>
 </template>
 
-<script></script>
+<script>
+export default {
+  components: {},
+  inject: [],
+  computed: {},
+  methods: {
+    routeBack() {
+      this.$router.go(-1)
+    },
+  },
+  mounted() {},
+}
+</script>
 
 <style scoped></style>
