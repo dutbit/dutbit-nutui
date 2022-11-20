@@ -42,7 +42,7 @@ export default {
         this.isLoading = false
         console.log(res)
         if (!res.data.error) {
-          this.numPoints = res.data.points
+          this.numPoints = res.data.dictRow.points
           this.isShowResult = true
           Notify.primary('查询完毕')
         } else Notify.warn('无查询结果')

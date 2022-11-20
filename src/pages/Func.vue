@@ -10,7 +10,8 @@
       ></nut-cell>
     </nut-cell-group>
     <nut-cell-group title="校园生活">
-      <nut-cell title="咨询反馈" is-link to="/func/issue-form"></nut-cell>
+      <!-- 小团为你办实事已经不再使用 -->
+      <!-- <nut-cell title="咨询反馈" is-link to="/func/issue-form"></nut-cell> -->
       <nut-cell title="日历图" is-link to="/func/dayimg"></nut-cell>
       <nut-cell title="志愿时长查询" is-link to="/func/voltime"></nut-cell>
       <nut-cell title="积分查询" is-link to="/func/point"></nut-cell>

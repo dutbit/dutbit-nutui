@@ -51,8 +51,20 @@ export default {
       this.app.pageTitle = (this.lstCont[this.swiperIndex] ?? '空文件夹').split('.')[0]
     },
     getCata(isGetCont) {
+      let sorted = []
       this.$http.get('/dayimg-oss/cata').then((res) => {
-        this.lstCata = res.data.lstCata.sort().reverse()
+        sorted = res.data.lstCata.map((p, index) => {
+          const dateArray = p.match(/[0-9]+/g)
+          const year = parseInt(dateArray[0])
+          const month = parseInt(dateArray[1])
+          const day = parseInt(dateArray[2])
+          return {days: year * 365 + month * 30 + day, index}
+          // 获取文件夹的年 月 日 
+        });
+        sorted = sorted.sort((a, b) => b.days - a.days)
+        this.lstCata = sorted.map(p => {
+          return res.data.lstCata[p.index]
+        })
         if (isGetCont) this.getCont(this.lstCata[0])
       })
     },
